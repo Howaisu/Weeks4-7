@@ -10,6 +10,8 @@ public class OnAndOff : MonoBehaviour
     public GameObject go;
     public SpriteRenderer sr;
     public OnAndOff script;
+    public AudioSource audioSource;
+    public AudioClip clip;
 
     // Update is called once per frame
     void Update()
@@ -21,6 +23,9 @@ public class OnAndOff : MonoBehaviour
             go.SetActive(false);
                 //
             //script.enabled = false
+
+            //
+
         }
         if (Input.GetKeyDown(KeyCode.Space))
         { 
@@ -28,6 +33,14 @@ public class OnAndOff : MonoBehaviour
             //script.enabled = true;
             go.SetActive(true);
 
+        }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            if (audioSource.isPlaying == false)
+            {
+                // audioSource.Play();
+                audioSource.PlayOneShot(clip);
+            }
         }
     }
 }
