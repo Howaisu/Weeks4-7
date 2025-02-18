@@ -4,13 +4,29 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    //Player Fish
     public GameObject playerFish;
     public Vector3 mousePos;
     public float playerSpeed = 5f;
+    public int value;
+    //targets learned from week 6
+    public GameObject npcFish;
+    public int howmanyFish = 15;
+    public List<GameObject> targetFish;
     // Start is called before the first frame update
     void Start()
     {
         //hello world
+        targetFish = new List<GameObject>();
+        for (int i = 0; i < howmanyFish; i++)
+        {
+            GameObject newTarget = Instantiate(npcFish);
+            newTarget.transform.position = Random.insideUnitCircle * 5;
+
+           
+
+            targetFish.Add(newTarget);
+        }
     }
 
     // Update is called once per frame
@@ -28,13 +44,12 @@ public class GameController : MonoBehaviour
     public void spinMaker()
     {
        
-        
-
         // Calculate the direction vector from the circle to the mouse
         Vector3 direction = mousePos - transform.position;
 
         // Find the angle (in radians) and convert it to degrees(circle)
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Debug.Log(angle);
 
         // Set the rotation angle to the circle or use transform.eulerAngle=rotation
         playerFish.transform.rotation = Quaternion.Euler(0, 0, angle);
@@ -51,6 +66,14 @@ public class GameController : MonoBehaviour
 
         // Move playerFish in the direction of the mouse
         playerFish.transform.position += direction * playerSpeed * Time.deltaTime;
+
+        //bug fixing
+        /*
+        if (playerFish.transform.position == mousePos)
+        { 
+            playerSpeed = 0; //not working, just leave like this for now
+        }
+        */
     }
 
 }
