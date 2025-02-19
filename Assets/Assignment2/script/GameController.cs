@@ -31,7 +31,11 @@ public class GameController : MonoBehaviour
     public float npcSpeed = 2f;  // Speed of npcFish
                                  //UI canvas - setting
     public GameObject Canvas;
-
+    //UI control values
+    public Slider fishAmount;
+    public Slider fishSpeed;
+    public TextMeshProUGUI amountCount;
+    public TextMeshProUGUI speedCount;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +59,8 @@ public class GameController : MonoBehaviour
         {
             CanvasOnOff();
         }
+        //UI
+        amountController();
 
     }
 
@@ -208,7 +214,40 @@ public class GameController : MonoBehaviour
 
     }
 
+    void amountController()
+    {
+        // Set the variables to the slider values (allows user to modify sliders freely)
+        howmanyFish = Mathf.RoundToInt(fishAmount.value);
+        npcSpeed = fishSpeed.value;
 
+        // Update text displays to match the current values
+        amountCount.text = howmanyFish.ToString();
+        speedCount.text = npcSpeed.ToString();
+    }
+
+    public void SpawnNPCs()//The button
+    {
+        // Clear existing NPCs before spawning new ones
+        for (int i = targetFish.Count - 1; i >= 0; i--)
+        {
+            Destroy(targetFish[i]);
+        }
+
+        targetFish.Clear();
+        npcValues.Clear();
+        npcDirections.Clear();
+
+        // Spawn new NPCs
+        spawnController();
+    }
+    public void ResSet()
+    {
+        //value to beginning
+
+        value = 20;
+        ShowValue();
+
+    }
 
 
 }
