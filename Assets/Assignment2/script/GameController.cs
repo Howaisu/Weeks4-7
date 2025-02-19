@@ -29,7 +29,8 @@ public class GameController : MonoBehaviour
     //NPC momvements
     public List<Vector2> npcDirections;  // Store movement direction for each npcFish
     public float npcSpeed = 2f;  // Speed of npcFish
-   
+                                 //UI canvas - setting
+    public GameObject Canvas;
 
 
     // Start is called before the first frame update
@@ -50,7 +51,11 @@ public class GameController : MonoBehaviour
         Move();
         CheckCollisions();
         MoveNpcFish();
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            CanvasOnOff();
+        }
+
     }
 
     // Method to make the circle face the mouse position
@@ -60,6 +65,7 @@ public class GameController : MonoBehaviour
         // Calculate the direction vector from the circle to the mouse
         Vector3 direction = mousePos - transform.position;
 
+        //https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Mathf.Rad2Deg.html
         // Find the angle (in radians) and convert it to degrees(circle)
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         //Debug.Log(angle);
@@ -86,6 +92,8 @@ public class GameController : MonoBehaviour
         { 
             playerSpeed = 0; //not working, just leave like this for now
         } Maybe use a bigger if() make it work until it is not same as the position of it?????
+
+        //Alright, does not a serious problem, give it up for now
         */
     }
     void spawnController()
@@ -189,6 +197,15 @@ public class GameController : MonoBehaviour
             
             }
         }
+    }
+
+    void CanvasOnOff() 
+    {
+        if (Canvas != null)
+        {
+            Canvas.SetActive(!Canvas.activeSelf); // Turn on and off Canvas visibility
+        }
+
     }
 
 
