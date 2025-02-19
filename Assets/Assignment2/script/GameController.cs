@@ -14,6 +14,8 @@ public class GameController : MonoBehaviour
     public int value;
     //text
     public GameObject txt;
+    public GameObject scoreboard;
+    TextMeshProUGUI score;
     TextMeshProUGUI text;
     //targets learned from week 6
     public GameObject npcFish;
@@ -109,6 +111,8 @@ public class GameController : MonoBehaviour
     void ShowValue()
     {
         text = txt.GetComponent<TextMeshProUGUI>();
+        score = scoreboard.GetComponent<TextMeshProUGUI>();
+        score.text = value.ToString();
         text.text = value.ToString();
 
     }
