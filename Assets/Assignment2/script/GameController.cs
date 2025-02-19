@@ -88,17 +88,17 @@ public class GameController : MonoBehaviour
             GameObject newTarget = Instantiate(npcFish);
             newTarget.transform.position = Random.insideUnitCircle * 10;
 
-            // Generate a random number between 5 and 15, write 16 for max int in Unity as 15
-            int npcValue = Random.Range(5, 16); 
+            // Generate a random number between 5 and 15
+            int npcValue = Random.Range(5, 16);
 
             // Store the value in the npcValues list
             npcValues.Add(npcValue);
 
-          
-            fish_text = fish_txt.GetComponent<TextMeshProUGUI>();
-            if (fish_text != null)
+            // Correct way to assign the text to each NPC fish's UI
+            TextMeshProUGUI npcText = newTarget.GetComponentInChildren<TextMeshProUGUI>();
+            if (npcText != null)
             {
-                fish_text.text = npcValue.ToString();
+                npcText.text = npcValue.ToString();
             }
 
             // Add the new fish to the list
@@ -114,28 +114,34 @@ public class GameController : MonoBehaviour
 
     void CheckCollisions()
     {
-        Debug.Log("eat!!");
-        for (int i = targetFish.Count - 1; i >= 0; i--)//check each fish in the array list(learned from last semester)
+        for (int i = targetFish.Count - 1; i >= 0; i--) // Loop from last to first
         {
             GameObject npc = targetFish[i];
             float distance = Vector3.Distance(playerFish.transform.position, npc.transform.position);
 
-            if (distance < 0.5f) // Adjust collision threshold(not public for now)
+            if (distance < 0.5f) // Collision threshold
             {
-                // Get the corresponding npcValue from the npcValues list
+                // Debugging logs to check mapping
+            
+
+                // Get the corresponding npcValue from npcValues list
                 int npcValue = npcValues[i];
 
                 // Add it to playerFish's value
                 value += npcValue;
-                ShowValue(); // Update the UI
+                ShowValue(); // Update the fish's UI text
 
                 // Remove the fish and its value from their respective lists
                 targetFish.RemoveAt(i);
                 npcValues.RemoveAt(i);
                 Destroy(npc);
+
+            
             }
         }
     }
+
+
 
 
 }

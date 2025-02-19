@@ -339,16 +339,11 @@ MonoBehaviour:
   playerSpeed: 5
   value: 20
   txt: {fileID: 2071415621}
-  npcFish: {fileID: 1015384651}
+  npcFish: {fileID: 663613095610893936, guid: de544816997e3a847a67c27b4aa9bd9e, type: 3}
   howmanyFish: 15
   targetFish: []
   npcValues: 
-  fish_txt: {fileID: 765137033}
---- !u!1 &765137033 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3617902893984569833, guid: de544816997e3a847a67c27b4aa9bd9e, type: 3}
-  m_PrefabInstance: {fileID: 6534076857702596012}
-  m_PrefabAsset: {fileID: 0}
+  fish_txt: {fileID: 663613095610893936, guid: de544816997e3a847a67c27b4aa9bd9e, type: 3}
 --- !u!1 &876977655
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,11 +600,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1015384651 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 663613095610893936, guid: de544816997e3a847a67c27b4aa9bd9e, type: 3}
-  m_PrefabInstance: {fileID: 6534076857702596012}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1128608188
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,71 +1011,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1001 &6534076857702596012
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 511083557986237786, guid: de544816997e3a847a67c27b4aa9bd9e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.8862
-      objectReference: {fileID: 0}
-    - target: {fileID: 511083557986237786, guid: de544816997e3a847a67c27b4aa9bd9e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.3838
-      objectReference: {fileID: 0}
-    - target: {fileID: 511083557986237786, guid: de544816997e3a847a67c27b4aa9bd9e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 511083557986237786, guid: de544816997e3a847a67c27b4aa9bd9e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 511083557986237786, guid: de544816997e3a847a67c27b4aa9bd9e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 511083557986237786, guid: de544816997e3a847a67c27b4aa9bd9e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 511083557986237786, guid: de544816997e3a847a67c27b4aa9bd9e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 511083557986237786, guid: de544816997e3a847a67c27b4aa9bd9e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 511083557986237786, guid: de544816997e3a847a67c27b4aa9bd9e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 511083557986237786, guid: de544816997e3a847a67c27b4aa9bd9e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 663613095610893936, guid: de544816997e3a847a67c27b4aa9bd9e, type: 3}
-      propertyPath: m_Name
-      value: npcFish
-      objectReference: {fileID: 0}
-    - target: {fileID: 663613095610893936, guid: de544816997e3a847a67c27b4aa9bd9e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6979088670054441606, guid: de544816997e3a847a67c27b4aa9bd9e, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: de544816997e3a847a67c27b4aa9bd9e, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1095,6 +1020,5 @@ SceneRoots:
   - {fileID: 1128608190}
   - {fileID: 170571776}
   - {fileID: 876977657}
-  - {fileID: 6534076857702596012}
   - {fileID: 2077987256}
   - {fileID: 947478861}
