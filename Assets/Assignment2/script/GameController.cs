@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -9,24 +11,23 @@ public class GameController : MonoBehaviour
     public Vector3 mousePos;
     public float playerSpeed = 5f;
     public int value;
+    //text
+    public GameObject txt;
+    TextMeshProUGUI text;
     //targets learned from week 6
     public GameObject npcFish;
     public int howmanyFish = 15;
     public List<GameObject> targetFish;
+    //Npc fish variables
+    // int worth;
+    public GameObject fish_txt;
+    TextMeshProUGUI fish_text;
+
     // Start is called before the first frame update
     void Start()
     {
-        //hello world
-        targetFish = new List<GameObject>();
-        for (int i = 0; i < howmanyFish; i++)
-        {
-            GameObject newTarget = Instantiate(npcFish);
-            newTarget.transform.position = Random.insideUnitCircle * 5;
-
-           
-
-            targetFish.Add(newTarget);
-        }
+        ShowValue();
+        spawnController();
     }
 
     // Update is called once per frame
@@ -72,8 +73,36 @@ public class GameController : MonoBehaviour
         if (playerFish.transform.position == mousePos)
         { 
             playerSpeed = 0; //not working, just leave like this for now
-        }
+        } Maybe use a bigger if() make it work until it is not same as the position of it?????
         */
+    }
+    void spawnController()
+    {
+        targetFish = new List<GameObject>();
+
+        for (int i = 0; i < howmanyFish; i++)
+        {
+            GameObject newTarget = Instantiate(npcFish);
+            newTarget.transform.position = Random.insideUnitCircle * 10;
+
+            // Generate a random number between 5 and 15
+            int randomValue = Random.Range(5, 16); // max-16 is 15 in Unity's Random.Range for ints 
+
+            // Assuming newTarget has a TextMeshPro component or a custom script that handles text
+            var fishTextComponent = newTarget.GetComponentInChildren<TextMeshPro>(); // Or another text component but might not allowed to use
+            if (fishTextComponent != null) //checking if it exist
+            {
+                fishTextComponent.text = randomValue.ToString();
+            }
+
+            // Add the new fish to the list
+            targetFish.Add(newTarget);
+        }
+    }
+    void ShowValue()
+    {
+        text = txt.GetComponent<TextMeshProUGUI>();
+        text.text = value.ToString();
     }
 
 }
