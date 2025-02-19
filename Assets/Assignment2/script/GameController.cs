@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 {
     //Player Fish
     public GameObject playerFish;
+    public GameObject secondLayer;
     public Vector3 mousePos;
     public float playerSpeed = 5f;
     public int value;
@@ -55,7 +56,7 @@ public class GameController : MonoBehaviour
         //Debug.Log(angle);
 
         // Set the rotation angle to the circle or use transform.eulerAngle=rotation
-        playerFish.transform.rotation = Quaternion.Euler(0, 0, angle);
+        secondLayer.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     void Move()
@@ -109,6 +110,7 @@ public class GameController : MonoBehaviour
     {
         text = txt.GetComponent<TextMeshProUGUI>();
         text.text = value.ToString();
+
     }
 
 
