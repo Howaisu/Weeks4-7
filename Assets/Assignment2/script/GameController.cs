@@ -26,6 +26,11 @@ public class GameController : MonoBehaviour
     public List<int> npcValues;
     public GameObject fish_txt;
     TextMeshProUGUI fish_text;
+    //NPC momvements
+    public List<Vector2> npcDirections;  // Store movement direction for each npcFish
+    public float npcSpeed = 2f;  // Speed of npcFish
+   
+
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +49,8 @@ public class GameController : MonoBehaviour
         //moving
         Move();
         CheckCollisions();
+        MoveNpcFish();
+        
     }
 
     // Method to make the circle face the mouse position
@@ -65,7 +72,7 @@ public class GameController : MonoBehaviour
     {
         // transfer mouse position to world space
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0; //lock the z
+        mousePos.z = 0; //lock the z (2D)
 
         // get the direction from fish to mouse
         Vector3 direction = (mousePos - playerFish.transform.position).normalized;
@@ -85,11 +92,12 @@ public class GameController : MonoBehaviour
     {
         targetFish = new List<GameObject>();
         npcValues = new List<int>();
+        npcDirections = new List<Vector2>();  // Initialize direction storage
 
         for (int i = 0; i < howmanyFish; i++)
         {
             GameObject newTarget = Instantiate(npcFish);
-            newTarget.transform.position = Random.insideUnitCircle * 10;
+            newTarget.transform.position = Random.insideUnitCircle * 10; // Can adjust for world space limits.
 
             // Generate a random number between 5 and 15
             int npcValue = Random.Range(5, 16);
@@ -97,7 +105,7 @@ public class GameController : MonoBehaviour
             // Store the value in the npcValues list
             npcValues.Add(npcValue);
 
-            // Correct way to assign the text to each NPC fish's UI
+            // Assign text value to NPC fish UI
             TextMeshProUGUI npcText = newTarget.GetComponentInChildren<TextMeshProUGUI>();
             if (npcText != null)
             {
@@ -106,16 +114,52 @@ public class GameController : MonoBehaviour
 
             // Add the new fish to the list
             targetFish.Add(newTarget);
+
+            // Assign a random movement direction
+            Vector2 randomDirection = Random.insideUnitCircle.normalized; // Random (x,y) direction
+            npcDirections.Add(randomDirection); // Store movement direction
+
         }
     }
-    void ShowValue()
-    {
-        text = txt.GetComponent<TextMeshProUGUI>();
-        score = scoreboard.GetComponent<TextMeshProUGUI>();
-        score.text = value.ToString();
-        text.text = value.ToString();
 
+
+    // Move the NPC fish in the assigned direction
+    void MoveNpcFish()
+    {
+        for (int i = 0; i < targetFish.Count; i++)
+        {
+            if (targetFish[i] != null) // Ensure fish exists
+            {
+                // Move each NPC fish in its assigned random direction
+                targetFish[i].transform.position += (Vector3)npcDirections[i] * npcSpeed * Time.deltaTime;
+
+                // Check if the fish hits the boundary and bounce it back
+                if (Mathf.Abs(targetFish[i].transform.position.x) > 10f || Mathf.Abs(targetFish[i].transform.position.y) > 10f)
+                {
+                    npcDirections[i] = -npcDirections[i]; // Reverse direction
+                }
+            }
+        }
     }
+
+
+    // Check if NPC hits world boundaries, then bounce back
+    //void CheckBounds()
+    //{
+    //    if (Mathf.Abs(transform.position.x) > worldBoundary || Mathf.Abs(transform.position.y) > worldBoundary)
+    //    {
+    //        moveDirection = -moveDirection; // Reverse direction upon hitting the boundary
+    //    }
+    //}
+
+    void ShowValue()
+        {
+            text = txt.GetComponent<TextMeshProUGUI>();
+            score = scoreboard.GetComponent<TextMeshProUGUI>();
+            score.text = value.ToString();
+            text.text = value.ToString();
+
+        }
 
 
     void CheckCollisions()
