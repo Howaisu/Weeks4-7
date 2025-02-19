@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
     public List<GameObject> targetFish;
     //Npc fish variables
     // int worth;
+    public List<int> npcValues;
     public GameObject fish_txt;
     TextMeshProUGUI fish_text;
 
@@ -39,6 +40,7 @@ public class GameController : MonoBehaviour
         spinMaker();
         //moving
         Move();
+        CheckCollisions();
     }
 
     // Method to make the circle face the mouse position
@@ -50,7 +52,7 @@ public class GameController : MonoBehaviour
 
         // Find the angle (in radians) and convert it to degrees(circle)
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Debug.Log(angle);
+        //Debug.Log(angle);
 
         // Set the rotation angle to the circle or use transform.eulerAngle=rotation
         playerFish.transform.rotation = Quaternion.Euler(0, 0, angle);
@@ -79,21 +81,24 @@ public class GameController : MonoBehaviour
     void spawnController()
     {
         targetFish = new List<GameObject>();
+        npcValues = new List<int>();
 
         for (int i = 0; i < howmanyFish; i++)
         {
             GameObject newTarget = Instantiate(npcFish);
             newTarget.transform.position = Random.insideUnitCircle * 10;
 
-            // Generate a random number between 5 and 15
-            int randomValue = Random.Range(5, 16); // max-16 is 15 in Unity's Random.Range for ints 
+            // Generate a random number between 5 and 15, write 16 for max int in Unity as 15
+            int npcValue = Random.Range(5, 16); 
 
-            // Assuming newTarget has a TextMeshPro component or a custom script that handles text
-            //var fishTextComponent = newTarget.GetComponentInChildren<TextMeshPro>(); // Or another text component but might not allowed to use
+            // Store the value in the npcValues list
+            npcValues.Add(npcValue);
+
+          
             fish_text = fish_txt.GetComponent<TextMeshProUGUI>();
-            if (fish_text != null) //checking if it exist
+            if (fish_text != null)
             {
-                fish_text.text = randomValue.ToString();
+                fish_text.text = npcValue.ToString();
             }
 
             // Add the new fish to the list
@@ -105,5 +110,32 @@ public class GameController : MonoBehaviour
         text = txt.GetComponent<TextMeshProUGUI>();
         text.text = value.ToString();
     }
+
+
+    void CheckCollisions()
+    {
+        Debug.Log("eat!!");
+        for (int i = targetFish.Count - 1; i >= 0; i--)//check each fish in the array list(learned from last semester)
+        {
+            GameObject npc = targetFish[i];
+            float distance = Vector3.Distance(playerFish.transform.position, npc.transform.position);
+
+            if (distance < 0.5f) // Adjust collision threshold(not public for now)
+            {
+                // Get the corresponding npcValue from the npcValues list
+                int npcValue = npcValues[i];
+
+                // Add it to playerFish's value
+                value += npcValue;
+                ShowValue(); // Update the UI
+
+                // Remove the fish and its value from their respective lists
+                targetFish.RemoveAt(i);
+                npcValues.RemoveAt(i);
+                Destroy(npc);
+            }
+        }
+    }
+
 
 }
