@@ -89,10 +89,11 @@ public class GameController : MonoBehaviour
             int randomValue = Random.Range(5, 16); // max-16 is 15 in Unity's Random.Range for ints 
 
             // Assuming newTarget has a TextMeshPro component or a custom script that handles text
-            var fishTextComponent = newTarget.GetComponentInChildren<TextMeshPro>(); // Or another text component but might not allowed to use
-            if (fishTextComponent != null) //checking if it exist
+            //var fishTextComponent = newTarget.GetComponentInChildren<TextMeshPro>(); // Or another text component but might not allowed to use
+            fish_text = fish_txt.GetComponent<TextMeshProUGUI>();
+            if (fish_text != null) //checking if it exist
             {
-                fishTextComponent.text = randomValue.ToString();
+                fish_text.text = randomValue.ToString();
             }
 
             // Add the new fish to the list
