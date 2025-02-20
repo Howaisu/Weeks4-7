@@ -42,11 +42,11 @@ public class GameController : MonoBehaviour
 
     public AudioSource audioSource2;
     //slider
-    public Slider volumeSlider1; // Slider for audioSource1
-    public Slider volumeSlider2; // Slider for audioSource2
+    public Slider volumeSlider1; // Slider for Music
+    public Slider volumeSlider2; // Slider for Sound Effect
 
-    public TextMeshProUGUI volumeText1; // Text display for slider 1
-    public TextMeshProUGUI volumeText2; // Text display for slider 2
+    public TextMeshProUGUI volumeText1; // s1
+    public TextMeshProUGUI volumeText2; //s2
     //color
     public Slider playerColorSlider;
     public Slider npcColorSlider;
@@ -240,7 +240,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    //void AnimatingScale() 
+    //void AnimatingScale() //Too dramatic
     //{
     //    if (eats)
     //    {
@@ -259,14 +259,14 @@ public class GameController : MonoBehaviour
     {
         if (Canvas != null)
         {
-            Canvas.SetActive(!Canvas.activeSelf); // Turn on and off Canvas visibility
+            Canvas.SetActive(!Canvas.activeSelf); // Turn on and off Canvas
         }
 
     }
 
     void amountController()
     {
-        // Set the variables to the slider values (allows user to modify sliders freely)
+        // Set the variables to the slider values 
         howmanyFish = Mathf.RoundToInt(fishAmount.value);
         npcSpeed = fishSpeed.value;
 
@@ -277,7 +277,7 @@ public class GameController : MonoBehaviour
 
     public void SpawnNPCs()//The button
     {
-        // Clear existing NPCs before spawning new ones
+        // Clear existing NPCs before spawning new ones, REFRESH
         for (int i = targetFish.Count - 1; i >= 0; i--)
         {
             Destroy(targetFish[i]);
@@ -292,7 +292,7 @@ public class GameController : MonoBehaviour
     }
     public void ResSet()
     {
-        //value to beginning
+        //a button change the value to beginning
 
         value = 20;
         ShowValue();
@@ -302,7 +302,7 @@ public class GameController : MonoBehaviour
     //volume slider
     void setUpVolume()
     {
-        //volume of the audio source to slider
+        //volume of the audio source to slider, set up the initial value for the slider
         volumeSlider1.value = audioSource.volume;
         volumeSlider2.value = audioSource2.volume;
 
@@ -310,7 +310,7 @@ public class GameController : MonoBehaviour
     }
     void UpdateVolume()
     {
-        // Set audio source volume to slider values
+        // Set audio source volume to slider values, input the user's value from the slider
         audioSource.volume = volumeSlider1.value;
         audioSource2.volume = volumeSlider2.value;
 
