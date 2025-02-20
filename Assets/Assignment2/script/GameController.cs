@@ -248,6 +248,7 @@ public class GameController : MonoBehaviour
         ShowValue();
 
     }
-
+    //sound effect
+    //volume slider
 
 }
