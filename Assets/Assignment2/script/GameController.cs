@@ -52,6 +52,11 @@ public class GameController : MonoBehaviour
     public Slider npcColorSlider;
     public Image previewSprite1;
     public Image previewSprite2;
+    //Animation
+    //bool eats;
+    public AnimationCurve big;
+    public float t;
+    //Bubbles
 
     // Start is called before the first frame update
     void Start()
@@ -81,7 +86,9 @@ public class GameController : MonoBehaviour
         //UI
         amountController();
         UpdateVolume();
-       // ColorChanger();  not work, leave it along to the end
+        // ColorChanger();  not work, leave it along to the end
+        //Animation
+        //AnimatingScale();
     }
 
     // Method to make the circle face the mouse position
@@ -219,6 +226,10 @@ public class GameController : MonoBehaviour
                 value += npcValue;
                 ShowValue(); // Update the fish's UI text
 
+                // Start the scaling animation
+                //eats = true;
+                //t = 0f; // Reset animation time
+
                 // Remove the fish and its value from their respective lists
                 targetFish.RemoveAt(i);
                 npcValues.RemoveAt(i);
@@ -228,6 +239,21 @@ public class GameController : MonoBehaviour
             }
         }
     }
+
+    //void AnimatingScale() 
+    //{
+    //    if (eats)
+    //    {
+    //        t += Time.deltaTime;
+    //        playerFish.transform.localScale = Vector3.one * big.Evaluate(t);
+
+    //        // Stop the animation when it reaches the end of the curve
+    //        if (t >= big.keys[big.length - 1].time)
+    //        {
+    //            eats = false;
+    //        }
+    //    }
+    //}
 
     public void CanvasOnOff() 
     {
