@@ -36,12 +36,31 @@ public class GameController : MonoBehaviour
     public Slider fishSpeed;
     public TextMeshProUGUI amountCount;
     public TextMeshProUGUI speedCount;
+    //sound effect
+    public AudioSource audioSource; 
+    public AudioClip eatSound;
+
+    public AudioSource audioSource2;
+    //slider
+    public Slider volumeSlider1; // Slider for audioSource1
+    public Slider volumeSlider2; // Slider for audioSource2
+
+    public TextMeshProUGUI volumeText1; // Text display for slider 1
+    public TextMeshProUGUI volumeText2; // Text display for slider 2
+    //color
+    public Slider playerColorSlider;
+    public Slider npcColorSlider;
+    public Image previewSprite1;
+    public Image previewSprite2;
 
     // Start is called before the first frame update
     void Start()
     {
         ShowValue();
         spawnController();
+
+        setUpVolume();
+
     }
 
     // Update is called once per frame
@@ -61,7 +80,8 @@ public class GameController : MonoBehaviour
         }
         //UI
         amountController();
-
+        UpdateVolume();
+       // ColorChanger();  not work, leave it along to the end
     }
 
     // Method to make the circle face the mouse position
@@ -185,8 +205,12 @@ public class GameController : MonoBehaviour
 
             if (distance < 0.5f) // Collision threshold
             {
-                // Debugging logs to check mapping
-            
+               
+                // Play the collision sound
+                if (audioSource != null && eatSound != null)
+                {
+                    audioSource.PlayOneShot(eatSound);
+                }
 
                 // Get the corresponding npcValue from npcValues list
                 int npcValue = npcValues[i];
@@ -205,7 +229,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void CanvasOnOff() 
+    public void CanvasOnOff() 
     {
         if (Canvas != null)
         {
@@ -248,7 +272,44 @@ public class GameController : MonoBehaviour
         ShowValue();
 
     }
-    //sound effect
+
     //volume slider
+    void setUpVolume()
+    {
+        //volume of the audio source to slider
+        volumeSlider1.value = audioSource.volume;
+        volumeSlider2.value = audioSource2.volume;
+
+        UpdateVolumeText();
+    }
+    void UpdateVolume()
+    {
+        // Set audio source volume to slider values
+        audioSource.volume = volumeSlider1.value;
+        audioSource2.volume = volumeSlider2.value;
+
+        // Update displayed volume text
+        UpdateVolumeText();
+    }
+
+    void UpdateVolumeText()
+    {
+        volumeText1.text = Mathf.RoundToInt(volumeSlider1.value * 100) + "%";
+        volumeText2.text = Mathf.RoundToInt(volumeSlider2.value * 100) + "%";
+    }
+    /*
+    void ColorChanger()
+    {
+     
+        Color playerNewColor = new Color(playerColorSlider.value, 1 - playerColorSlider.value, playerColorSlider.value, 1);
+        playerFish.GetComponent<Image>().color = playerNewColor;
+        previewSprite1.GetComponent<Image>().color = playerNewColor;
+
+       
+        Color npcNewColor = new Color(1 - npcColorSlider.value, npcColorSlider.value, 1 - npcColorSlider.value, 1);
+        npcFish.GetComponent<Image>().color = npcNewColor;
+        previewSprite2.GetComponent<Image>().color = npcNewColor;
+    
+    }*/
 
 }
